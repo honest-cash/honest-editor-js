@@ -1,0 +1,25 @@
+.navigation-bar__inner--left,
+.navigation-bar__inner--right {
+  display: none;
+}
+
+.new-discussion-button {
+  display: none;
+}
+
+.stat-panel__block {
+  display: none;
+}
+
+/**
+  Adjustments for header
+*/
+.layout {
+  width: 100%;
+  height: calc(100% - 56px);
+}
+
+.button-bar {
+  width: 100%;
+  height: calc(100% - 56px);
+}
