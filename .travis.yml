@@ -1,16 +1,23 @@
-language: node_js
+notifications:
+  slack: vqlabs:j71yKGBW4ipmLoWcJuteN83i
 
-node_js:
-  - "8"
+cache:
+  directories:
+    - node_modules
 
-services:
-  - docker
+addons:
+  sauce_connect: true
 
-before_deploy:
-  - docker build -t benweet/stackedit .
+matrix:
+  include:
+  - name: "honest-editor-js"
+    sudo: false
+    os: osx
+    osx_image: xcode10.1
 
-deploy:
-  provider: script
-  script: bash build/docker-push-tag.sh
-  on:
-    tags: true
+    install:
+    - npm install
+
+    script:
+    - npm run build
+    - npm run test

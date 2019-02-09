@@ -41,7 +41,7 @@ if (!localStorage.installPrompted) {
     promptEvent.preventDefault();
 
     try {
-      await store.dispatch('notification/confirm', 'Add StackEdit to your home screen?');
+      await store.dispatch('notification/confirm', 'Add Honest Editor to your home screen?');
       promptEvent.prompt();
       await promptEvent.userChoice;
     } catch (err) {
@@ -52,24 +52,34 @@ if (!localStorage.installPrompted) {
 }
 
 Vue.config.productionTip = false;
+
 export default class HonestEditor {
   constructor(domId) {
-    /* eslint-disable no-new */
-
     this.changeListeners = [];
+    this.isSaving = false;
 
+    /* eslint-disable no-new */
     new Vue({
       el: `#${domId}`,
       store,
       render: h => h(App),
     });
 
-    store.subscribe((mutation, state) => {
-      const editor = document.getElementsByClassName('editor')[0];
+    // eslint-disable-next-line prefer-destructuring
+    this.editor = document.getElementsByClassName('editor')[0];
 
-      if (editor) {
-        this.changeListeners.forEach(fn => fn(editor.innerText));
+    store.subscribe((/** mutation, state */) => {
+      if (this.isSaving) {
+        return;
       }
+
+      this.isSaving = setTimeout(() => {
+        if (this.editor) {
+          this.changeListeners.forEach(fn => fn(this.editor.innerText));
+
+          delete this.isSaving;
+        }
+      }, 1000);
     });
   }
 
@@ -77,9 +87,10 @@ export default class HonestEditor {
     this.changeListeners.push(fn);
   }
 
+  // eslint-disable-next-line class-methods-use-this
   async setContent(markdown) {
     const item = await workspaceSvc.createFile({
-      ...Provider.parseContent(markdown)
+      ...Provider.parseContent(markdown),
     });
 
     store.commit('file/setCurrentId', item.id);
