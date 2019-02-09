@@ -1,5 +1,5 @@
-# Honest Editor
-[![NPM version]](https://www.npmjs.org/package/honest-editor-js)
+# honest-editor-js
+[![Build Status](https://travis-ci.org/honest-cash/honest-editor-js.svg?branch=master)](https://travis-ci.org/honest-cash/honest-editor-js)
 
 > Full-featured, open-source Markdown editor based on PageDown, the Markdown library used by Stack Overflow and the other Stack Exchange sites.
 
