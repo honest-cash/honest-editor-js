@@ -40,13 +40,8 @@ honestEditor.subscribe(newMarkdown => {
   console.log(newMarkdown)
 });
 
-honestEditor.getContent(markdown => {
-  console.log(markdown)
-});
-
-honestEditor._getStore(store => {
-  console.log(store)
-});
+const markdown = honestEditor.getContent();
+const store = honestEditor._getStore();
 ```
 
 ### Features:
