@@ -39,6 +39,14 @@ honestEditor.setContent(`
 honestEditor.subscribe(newMarkdown => {
   console.log(newMarkdown)
 });
+
+honestEditor.getContent(markdown => {
+  console.log(markdown)
+});
+
+honestEditor._getStore(store => {
+  console.log(store)
+});
 ```
 
 ### Features:
