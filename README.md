@@ -1,7 +1,9 @@
 # honest-editor-js
 [![Build Status](https://travis-ci.org/honest-cash/honest-editor-js.svg?branch=master)](https://travis-ci.org/honest-cash/honest-editor-js)
 
-> Full-featured, open-source Markdown editor based on PageDown, the Markdown library used by Stack Overflow and the other Stack Exchange sites.
+> Full-featured, open-source Markdown editor used at Honest.Cash.
+> Based on StackEdit, the PageDown-Markdown library used by Stack Overflow and the other Stack Exchange sites.
+
 
 **DEMO: https://editor.honest.cash** 
 

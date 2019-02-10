@@ -39,8 +39,8 @@
       </div>
       <div class="tour-step__inner" v-else-if="step === 'end'">
         <h2>Let's start writing!</h2>
-        <p>Welcome to the community of top authors, thinkers, and emerging storytellers.</p>
-        <p>If you have any problems, let me know at adrian@honest.cash</p>
+        <p>Honest is a community of top authors, thinkers, and emerging storytellers.</p>
+        <p>If you have any problems, let us know at info@honest.cash</p>
         <div class="tour-step__button-bar">
           <button class="button button--resolve" @click="finish">Ok</button>
         </div>

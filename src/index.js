@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 import Vue from 'vue';
 import 'babel-polyfill';
 import 'indexeddbshim/dist/indexeddbshim';
@@ -53,10 +54,11 @@ if (!localStorage.installPrompted) {
 
 Vue.config.productionTip = false;
 
-export default class HonestEditor {
+class HonestEditor {
   constructor(domId) {
     this.changeListeners = [];
     this.isSaving = false;
+    this.currentContent = '';
 
     /* eslint-disable no-new */
     new Vue({
@@ -69,6 +71,10 @@ export default class HonestEditor {
     this.editor = document.getElementsByClassName('editor')[0];
 
     store.subscribe((/** mutation, state */) => {
+      if (this.editor) {
+        this.currentContent = this.editor.innerText;
+      }
+
       if (this.isSaving) {
         return;
       }
@@ -87,6 +93,14 @@ export default class HonestEditor {
     this.changeListeners.push(fn);
   }
 
+  getContent() {
+    return this.this.currentContent;
+  }
+
+  _getStore() {
+    return store;
+  }
+
   // eslint-disable-next-line class-methods-use-this
   async setContent(markdown) {
     const item = await workspaceSvc.createFile({
@@ -96,3 +110,7 @@ export default class HonestEditor {
     store.commit('file/setCurrentId', item.id);
   }
 }
+
+window.HonestEditor = HonestEditor;
+
+export default HonestEditor;

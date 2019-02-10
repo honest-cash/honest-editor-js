@@ -19,7 +19,7 @@ import ContextMenu from './ContextMenu';
 import SplashScreen from './SplashScreen';
 import syncSvc from '../services/syncSvc';
 import networkSvc from '../services/networkSvc';
-import sponsorSvc from '../services/sponsorSvc';
+// import sponsorSvc from '../services/sponsorSvc';
 import tempFileSvc from '../services/tempFileSvc';
 import store from '../store';
 import './common/vueGlobals';
@@ -58,7 +58,8 @@ export default {
     try {
       await syncSvc.init();
       await networkSvc.init();
-      await sponsorSvc.init();
+      // honest-editor-js: disabled
+      // await sponsorSvc.init();
       this.ready = true;
       tempFileSvc.setReady();
     } catch (err) {

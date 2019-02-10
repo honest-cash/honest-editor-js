@@ -1,5 +1,5 @@
 {
-  "name": "StackEdit",
+  "name": "HonestEditor",
   "description": "In-browser Markdown editor",
   "version": "1.0.13",
   "manifest_version": 2,
@@ -15,10 +15,10 @@
   },
   "app": {
     "urls": [
-      "https://stackedit.io/"
+      "https://honest.cash/"
     ],
     "launch": {
-      "web_url": "https://stackedit.io/app"
+      "web_url": "https://editor.honest.cash/"
     }
   },
   "offline_enabled": true,

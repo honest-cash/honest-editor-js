@@ -29,7 +29,13 @@ const checkPayment = async () => {
     && lastCheck + checkPaymentEvery < currentDate
   ) {
     lastCheck = currentDate;
-    await getMonetize();
+
+    // everyone is a sponsor!
+    store.commit('setMonetizeSponsor', true);
+
+    // await getMonetize();
+
+    /**
     monetize.getPaymentsImmediate((err, payments) => {
       const isSponsor = payments && payments.app === appId && (
         (payments.chargeOption && payments.chargeOption.alias === 'once') ||
@@ -38,6 +44,7 @@ const checkPayment = async () => {
         store.commit('setMonetizeSponsor', isSponsor);
       }
     });
+    */
   }
 };
 

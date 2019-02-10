@@ -127,8 +127,8 @@ var webpackConfig = merge(baseWebpackConfig, {
         events: true
       },
       AppCache: true,
-      excludes: ['**/.*', '**/*.map', '**/index.html', '**/static/oauth2/callback.html', '**/icons-*/*.png', '**/static/fonts/KaTeX_*'],
-      externals: ['/', '/app', '/oauth2/callback']
+      excludes: ['**/.*', '**/*.map', '**/index.html', '**/icons-*/*.png', '**/static/fonts/KaTeX_*'],
+      externals: [ '/' ]
     }),
   ]
 })
