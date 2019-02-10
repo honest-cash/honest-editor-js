@@ -59,7 +59,6 @@ class HonestEditor {
     this.changeListeners = [];
     this.isSaving = false;
     this.currentContent = '';
-
     /* eslint-disable no-new */
     new Vue({
       el: `#${domId}`,
