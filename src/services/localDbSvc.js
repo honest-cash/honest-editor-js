@@ -394,7 +394,18 @@ const localDbSvc = {
         const currentFile = store.getters['file/current'];
         // If current file has no ID, get the most recent file
         if (!currentFile.id) {
-          const recentFile = store.getters['file/lastOpened'];
+          /* 15.02.2019 - Block added by Sercan AKMAN */
+          /* block start */
+          const newFile = await workspaceSvc.createFile({
+            name: 'Welcome file',
+            text: welcomeFile,
+          }, true);
+          store.commit('file/setCurrentId', newFile.id);
+          /* block end */
+
+          /* 15.02.2019 - Block commented out by Sercan AKMAN */
+          /* block start */
+          /* const recentFile = store.getters['file/lastOpened'];
           // Set it as the current file
           if (recentFile.id) {
             store.commit('file/setCurrentId', recentFile.id);
@@ -404,9 +415,11 @@ const localDbSvc = {
               name: 'Welcome file',
               text: welcomeFile,
             }, true);
+            console.log('newFile', newFile);
             // Set it as the current file
             store.commit('file/setCurrentId', newFile.id);
-          }
+          } */
+          /* block end */
         } else {
           try {
             // Load contentState from DB
