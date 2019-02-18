@@ -56,47 +56,15 @@ Vue.config.productionTip = false;
 
 class HonestEditor {
   constructor(domId) {
-    this.changeListeners = [];
-    this.isSaving = false;
-    this.currentContent = '';
     /* eslint-disable no-new */
     new Vue({
       el: `#${domId}`,
       store,
       render: h => h(App),
     });
-
-    // eslint-disable-next-line prefer-destructuring
-    this.editor = document.getElementsByClassName('editor')[0];
-
-    store.subscribe((/** mutation, state */) => {
-      if (this.editor) {
-        this.currentContent = this.editor.innerText;
-      }
-
-      if (this.isSaving) {
-        return;
-      }
-
-      this.isSaving = setTimeout(() => {
-        if (this.editor) {
-          this.changeListeners.forEach(fn => fn(this.editor.innerText));
-
-          delete this.isSaving;
-        }
-      }, 1000);
-    });
   }
 
-  subscribe(fn) {
-    this.changeListeners.push(fn);
-  }
-
-  getContent() {
-    return this.this.currentContent;
-  }
-
-  _getStore() {
+  getStore() {
     return store;
   }
 
