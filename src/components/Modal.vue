@@ -202,11 +202,12 @@ export default {
 @import '../styles/variables.scss';
 
 .modal {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(160, 160, 160, 0.5);
-  overflow: auto;
+  position: absolute !important;
+  width: 100% !important;
+  height: 100% !important;
+  background-color: rgba(160, 160, 160, 0.5) !important;
+  overflow: auto !important;
+  display: initial !important;
 
   p {
     line-height: 1.5;
