@@ -55,13 +55,25 @@ if (!localStorage.installPrompted) {
 Vue.config.productionTip = false;
 
 class HonestEditor {
-  constructor(domId) {
+  constructor(domId, options = {
+    upload: {
+      image: {
+        url: null,
+        tokenKey: null,
+        token: null,
+      },
+    },
+  }) {
     /* eslint-disable no-new */
     new Vue({
       el: `#${domId}`,
       store,
       render: h => h(App),
     });
+
+    if (options && typeof options === 'object') {
+      localStorage.setItem('HC_EDITOR_OPTIONS', JSON.stringify(options));
+    }
   }
 
   getStore() {
