@@ -55,15 +55,7 @@ if (!localStorage.installPrompted) {
 Vue.config.productionTip = false;
 
 class HonestEditor {
-  constructor(domId, options = {
-    upload: {
-      image: {
-        url: null,
-        tokenKey: null,
-        token: null,
-      },
-    },
-  }) {
+  constructor(domId, options) {
     /* eslint-disable no-new */
     new Vue({
       el: `#${domId}`,

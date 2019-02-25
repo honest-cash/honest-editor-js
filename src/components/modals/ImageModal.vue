@@ -38,11 +38,17 @@ export default modalTemplate({
           console.log('Please specify the URL in Editor Options');
           return false;
         }
-        if (!this.editorOptions.upload.image.tokenKey) {
+        if (
+          this.editorOptions.upload.image.requireAuth &&
+          !this.editorOptions.upload.image.tokenKey
+        ) {
           console.log('Please specify the tokenKey in Editor Options');
           return false;
         }
-        if (!this.editorOptions.upload.image.token) {
+        if (
+          this.editorOptions.upload.image.requireAuth &&
+          !this.editorOptions.upload.image.token
+        ) {
           console.log('Please specify the token in Editor Options');
           return false;
         }
@@ -77,10 +83,16 @@ export default modalTemplate({
         if (!this.editorOptions.upload.image.url) {
           return console.log('Please specify the URL in Editor Options');
         }
-        if (!this.editorOptions.upload.image.tokenKey) {
+        if (
+          this.editorOptions.upload.image.requireAuth &&
+          !this.editorOptions.upload.image.tokenKey
+        ) {
           return console.log('Please specify the tokenKey in Editor Options');
         }
-        if (!this.editorOptions.upload.image.token) {
+        if (
+          this.editorOptions.upload.image.requireAuth &&
+          !this.editorOptions.upload.image.token
+        ) {
           return console.log('Please specify the token in Editor Options');
         }
 
@@ -88,12 +100,14 @@ export default modalTemplate({
         const inputField = document.getElementById('image-upload');
         formData.append('files[]', inputField.files[0]);
 
+        const headers = this.editorOptions.upload.image.requireAuth ? {
+          [this.editorOptions.upload.image.tokenKey]: this.editorOptions.upload.image.token,
+        } : {};
+
         fetch(this.editorOptions.upload.image.url, {
           method: 'POST',
           body: formData,
-          headers: {
-            [this.editorOptions.upload.image.tokenKey]: this.editorOptions.upload.image.token,
-          },
+          headers,
         })
           .then(response => response.json())
           .then((response) => {
