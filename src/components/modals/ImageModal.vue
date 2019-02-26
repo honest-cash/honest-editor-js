@@ -11,8 +11,8 @@
       </template>
     </div>
     <div class="modal__button-bar">
-      <button class="button" @click="reject()">Cancel</button>
-      <button class="button button--resolve" @click="resolve()">Ok</button>
+      <button class="button" @click="reject()" :disabled="isUploading">Cancel</button>
+      <button class="button button--resolve" @click="resolve()" :disabled="isUploading">Ok</button>
     </div>
   </modal-inner>
 </template>
@@ -30,6 +30,7 @@ export default modalTemplate({
   data: () => ({
     url: '',
     editorOptions: JSON.parse(localStorage.getItem('HC_EDITOR_OPTIONS')),
+    isUploading: false,
   }),
   computed: {
     shouldShowUpload() {
@@ -78,7 +79,7 @@ export default modalTemplate({
       this.config.reject();
       callback(null);
     },
-    async uploadImage() {
+    uploadImage() {
       if (this.editorOptions) {
         if (!this.editorOptions.upload.image.url) {
           return console.log('Please specify the URL in Editor Options');
@@ -96,6 +97,8 @@ export default modalTemplate({
           return console.log('Please specify the token in Editor Options');
         }
 
+        this.isUploading = true;
+
         const formData = new FormData();
         const inputField = document.getElementById('image-upload');
         formData.append('files[]', inputField.files[0]);
@@ -112,14 +115,16 @@ export default modalTemplate({
           .then(response => response.json())
           .then((response) => {
             if (response.files.length) {
-              const { callback } = this.config;
-              this.config.resolve();
-              return callback(response.files[0].url);
+              this.url = response.files[0].url;
+              store.dispatch('notification/info', 'Image uploaded');
+            } else {
+              this.reject();
             }
-            return this.reject();
+            this.isUploading = false;
           })
           .catch((error) => {
             console.log('Image Upload Error', error);
+            this.isUploading = false;
             this.reject();
           });
       }
