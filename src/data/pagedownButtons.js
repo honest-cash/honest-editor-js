@@ -57,4 +57,8 @@ export default [{
   method: 'image',
   title: 'Image',
   icon: 'file-image',
+}, {
+  method: 'video',
+  title: 'Video',
+  icon: 'eye',
 }];

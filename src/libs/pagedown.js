@@ -28,6 +28,9 @@ var defaultsStrings = {
   imagedescription: "enter image description here",
   imagedialog: "<p><b>Insert Image</b></p><p>http://example.com/images/diagram.jpg \"optional title\"<br><br>Need <a href='http://www.google.com/search?q=free+image+hosting' target='_blank'>free image hosting?</a></p>",
 
+  video: "Video <iframe>",
+  videodescription: "enter video description here",
+
   olist: "Numbered List <ol> Ctrl/Cmd+O",
   ulist: "Bulleted List <ul> Ctrl/Cmd+U",
   litem: "List item",
@@ -120,6 +123,7 @@ function Pagedown(options) {
   hooks.addNoop("onPreviewRefresh"); // called with no arguments after the preview has been refreshed
   hooks.addNoop("postBlockquoteCreation"); // called with the user's selection *after* the blockquote was created; should return the actual to-be-inserted text
   hooks.addFalse("insertImageDialog");
+  hooks.addFalse("insertVideoDialog");
   /* called with one parameter: a callback to be called with the URL of the image. If the application creates
    * its own image insertion dialog, this hook should return true, and the callback should be called with the chosen
    * image url (or null if the user cancelled). If this hook returns false, the default dialog will be used.
@@ -464,12 +468,15 @@ function UIManager(input, commandManager) {
     buttons.italic = bindCommand("doItalic");
     buttons.strikethrough = bindCommand("doStrikethrough");
     buttons.link = bindCommand(function (chunk, postProcessing) {
-      return this.doLinkOrImage(chunk, postProcessing, false);
+      return this.doLinkOrImage(chunk, postProcessing, 'link');
     });
     buttons.quote = bindCommand("doBlockquote");
     buttons.code = bindCommand("doCode");
     buttons.image = bindCommand(function (chunk, postProcessing) {
-      return this.doLinkOrImage(chunk, postProcessing, true);
+      return this.doLinkOrImage(chunk, postProcessing, 'image');
+    });
+    buttons.video = bindCommand(function (chunk, postProcessing) {
+      return this.doLinkOrImage(chunk, postProcessing, 'video');
     });
     buttons.olist = bindCommand(function (chunk, postProcessing) {
       this.doList(chunk, postProcessing, true);
@@ -707,7 +714,7 @@ function properlyEncoded(linkdef) {
   });
 }
 
-commandProto.doLinkOrImage = function (chunk, postProcessing, isImage) {
+commandProto.doLinkOrImage = function (chunk, postProcessing, type) {
 
   chunk.trimWhitespace();
   //chunk.findTags(/\s*!?\[/, /\][ ]?(?:\n[ ]*)?(\[.*?\])?/);
@@ -762,13 +769,15 @@ commandProto.doLinkOrImage = function (chunk, postProcessing, isImage) {
 
         var num = that.addLinkDef(chunk, linkDef);
         */
-        chunk.startTag = isImage ? "![" : "[";
+        chunk.startTag = type === 'image' || type === 'video' ? "![" : "[";
         //chunk.endTag = "][" + num + "]";
         chunk.endTag = "](" + properlyEncoded(link) + ")";
 
         if (!chunk.selection) {
-          if (isImage) {
+          if (type === 'image') {
             chunk.selection = that.getString("imagedescription");
+          } else if (type === 'video') {
+            chunk.selection = that.getString("videodescription");
           } else {
             chunk.selection = that.getString("linkdescription");
           }
@@ -777,8 +786,10 @@ commandProto.doLinkOrImage = function (chunk, postProcessing, isImage) {
       postProcessing();
     };
 
-    if (isImage) {
+    if (type === 'image') {
       this.hooks.insertImageDialog(linkEnteredCallback);
+    } else if (type === 'video') {
+      this.hooks.insertVideoDialog(linkEnteredCallback);
     } else {
       this.hooks.insertLinkDialog(linkEnteredCallback);
     }

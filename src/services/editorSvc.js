@@ -383,6 +383,13 @@ const editorSvc = Object.assign(new Vue(), editorSvcDiscussions, editorSvcUtils,
       });
       return true;
     });
+    this.pagedownEditor.hooks.set('insertVideoDialog', (callback) => {
+      store.dispatch('modal/open', {
+        type: 'video',
+        callback,
+      });
+      return true;
+    });
 
     this.editorElt.parentNode.addEventListener('scroll', () => this.saveContentState(true));
     this.previewElt.parentNode.addEventListener('scroll', () => this.saveContentState(true));
