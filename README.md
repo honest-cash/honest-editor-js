@@ -113,5 +113,7 @@ Apache License Version 2.0
 - wrapped stackedit into an importable module
 - added subscribe and setContent methods
 - removed elements for cloud saves
+- added editor options
+- added image upload to an API
 
 
