@@ -392,3 +392,137 @@ textarea {
   }
   // scss-lint:enable ImportantRule
 }
+
+.editor h1,
+.editor .h1,
+.preview h1,
+.preview .h1 {
+  font-size: 22px;
+  margin: 5px 0;
+}
+
+.editor h2,
+.editor .h2,
+.preview h2,
+.preview .h2 {
+  font-size: 20px;
+  margin: 5px 0;
+}
+
+.editor h3,
+.editor .h3,
+.preview h3,
+.preview .h3 {
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+.editor h4,
+.editor .h4,
+.preview h4,
+.preview .h4 {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.editor h5,
+.editor .h5,
+.preview h5,
+.preview .h5 {
+  font-size: 14px;
+  margin: 10px 0;
+}
+
+.editor h6,
+.editor .h6,
+.preview h6,
+.preview .h6 {
+  font-size: 12px;
+  margin: 10px 0;
+}
+
+.editor p,
+.editor .p,
+.editor.medium-editor-insert-plugin .p,
+.editor span,
+.editor .span,
+.editor.medium-editor-insert-plugin .span,
+.preview p,
+.preview .p,
+.preview.medium-preview-insert-plugin .p,
+.preview span,
+.preview .span,
+.preview.medium-preview-insert-plugin .span {
+  font-size: 15px;
+  margin: 0 0 10px !important;
+}
+
+.editor ul,
+.editor ul li,
+.editor li,
+.preview ul,
+.preview ul li,
+.preview li {
+  font-size: 15px;
+}
+
+.editor ol,
+.editor ol li,
+.editor li,
+.preview ol,
+.preview ol li,
+.preview li {
+  font-size: 15px;
+}
+
+.editor pre,
+.preview pre,
+.post-paid-section-preview-paid-section pre {
+  font-size: 13px;
+  margin: 0 0 10px !important;
+}
+
+.post-paid-section-preview-paid-section pre {
+  font-size: 13px;
+}
+
+.post-paid-section-preview-paid-section li > p {
+  display: initial;
+}
+
+.modal-body,
+.modal-body p,
+.modal-body span,
+.editor p,
+.editor span,
+.editor ul,
+.editor ul li,
+.editor ol,
+.editor ol li,
+.editor li,
+.preview p,
+.preview span,
+.preview ul,
+.preview ul li,
+.preview ol,
+.preview ol li,
+.preview li {
+  font-size: 15px;
+}
+
+.post-paid-section-preview-paid-section > blockquote {
+  margin-left: 15px;
+}
+
+.bb-2 {
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+}
+
+.bb-dashed {
+  border-bottom-style: dashed;
+}
+
+.bb-red {
+  border-bottom-color: red;
+}
